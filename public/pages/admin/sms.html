@@ -1,0 +1,29 @@
+<script>
+  (function(){
+    function check(){
+      if (window.firebase && firebase.auth) {
+        firebase.auth().onAuthStateChanged(function(user){ if (!user) window.location.replace('/login.html'); });
+      } else {
+        var t = setInterval(function(){ if (window.firebase && firebase.auth) { clearInterval(t); firebase.auth().onAuthStateChanged(function(user){ if (!user) window.location.replace('/login.html'); }); } }, 100);
+        setTimeout(function(){ clearInterval(t); }, 5000);
+      }
+    }
+    check();
+  })();
+</script>
+
+<header class="topbar">
+  <h1>Notification/Reminder (Admin)</h1>
+</header>
+<div class="sms-content">
+  <div class="notifications-container"></div>
+</div>
+
+<script src="/Javascript/sms.js"></script>
+<script src="/Javascript/injectSidebar.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-auth-compat.js"></script>
+<script src="/Javascript/firebase.js"></script>
+
+
+
